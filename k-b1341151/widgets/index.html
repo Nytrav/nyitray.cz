@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Kevin widgets and Watch — rough draft</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+:root{--surface-1:#f7f6f3;--surface-2:#fff;--border:rgba(0,0,0,.12);--border-strong:rgba(0,0,0,.22);--text-primary:#1f1f1d;--text-secondary:#6b6a66;--text-accent:#185FA5;--bg-accent:#E6F1FB;--text-success:#3B6D11;--bg-success:#EAF3DE;--text-warning:#854F0B;--bg-warning:#FAEEDA;--text-danger:#A32D2D;--radius:8px}
+@media (prefers-color-scheme:dark){:root{--surface-1:#262624;--surface-2:#30302e;--border:rgba(255,255,255,.14);--border-strong:rgba(255,255,255,.26);--text-primary:#f2f1ec;--text-secondary:#b4b2a9;--text-accent:#85B7EB;--bg-accent:#0C447C;--text-success:#C0DD97;--bg-success:#27500A;--text-warning:#FAC775;--bg-warning:#633806;--text-danger:#F09595}body{background:#1f1e1d}}
+body{margin:0;font-family:-apple-system,system-ui,sans-serif;color:var(--text-primary);background:var(--surface-1)}
+button{font:inherit;color:var(--text-primary);background:transparent;border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:6px 10px;cursor:pointer}
+input{font:inherit;color:var(--text-primary);background:var(--surface-2);border:0.5px solid var(--border-strong);border-radius:var(--radius);height:36px;padding:0 10px}
+.ph{max-width:420px;margin:0 auto;padding:14px 12px;background:var(--surface-2);min-height:100vh;box-sizing:border-box}
+.scr{min-height:calc(100vh - 28px);display:flex;flex-direction:column}
+.tb{display:flex;border-top:0.5px solid var(--border);margin-top:auto;padding-top:8px;position:sticky;bottom:0;background:var(--surface-2)}
+.tb button{flex:1;border:none;background:transparent;font-size:11px;color:var(--text-secondary);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px}
+.tb button.on{color:var(--text-accent)}
+.cd{border:0.5px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:var(--surface-2);font-size:14px}
+.pill{font-size:11px;padding:2px 8px;border-radius:var(--radius)}
+.t0{background:var(--bg-success);color:var(--text-success)}.t1{background:var(--bg-accent);color:var(--text-accent)}.t2{background:var(--bg-warning);color:var(--text-warning)}
+.row{display:flex;gap:6px;margin-top:8px}.row button{flex:1;font-size:13px;padding:8px 4px}
+.mut{color:var(--text-secondary);font-size:12px}.lnk{cursor:pointer}
+</style><style>.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}body{background:var(--surface-2)}</style></head><body><div style="max-width:700px;margin:0 auto;padding:12px"><p style="font-size:13px"><a href="../" style="color:var(--text-accent)">Back to the app draft</a></p><h2 class="sr-only">Mockups of Kevin iPhone widgets (home screen, lock screen, Live Activity, control) and Apple Watch app screens and complications.</h2>
+<style>
+.g{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.w{background:var(--surface-2);border:0.5px solid var(--border);border-radius:20px;padding:12px;font-size:12px;box-sizing:border-box}
+.lb{font-size:11px;color:var(--text-secondary);margin-top:6px;text-align:center}
+.k{font-size:11px;color:var(--text-secondary)}
+.big{font-size:26px;font-weight:500;line-height:1.1}
+.pill{font-size:11px;padding:1px 7px;border-radius:var(--radius);display:inline-block}
+.t2{background:var(--bg-warning);color:var(--text-warning)}.t1{background:var(--bg-accent);color:var(--text-accent)}
+.btn{border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:3px 8px;font-size:11px;display:inline-block}
+.lk{background:var(--surface-1);border-radius:20px;padding:14px}
+.wt{width:150px;height:180px;border-radius:38px;background:var(--surface-1);border:0.5px solid var(--border-strong);padding:14px 12px;box-sizing:border-box;font-size:12px;display:flex;flex-direction:column;gap:5px}
+.sec{font-size:14px;font-weight:500;margin:1.5rem 0 .6rem}
+</style>
+<div style="padding:.5rem 0">
+<div class="sec">iPhone home screen</div>
+<div class="g">
+<div><div class="w" style="width:150px;height:150px;display:flex;flex-direction:column"><div class="k"><i class="ti ti-checks" aria-hidden="true"></i> Kevin</div><div class="big" style="margin-top:8px">4</div><div>to review</div><div class="k" style="margin-top:auto">~6 min · next nudge 11:00</div></div><div class="lb">Small: queue count</div></div>
+<div><div class="w" style="width:320px;height:150px;display:flex;flex-direction:column;gap:6px"><div class="k">Needs you</div><div style="display:flex;justify-content:space-between;align-items:center"><span>Certificate for Jana</span><span class="btn">Open</span></div><div style="display:flex;justify-content:space-between;align-items:center"><span>Reply to Petr: Thursday 14:00</span><span class="btn">Open</span></div><div style="display:flex;justify-content:space-between;align-items:center"><span>Hold 11:00 for the call</span><span class="btn">Approve</span></div></div><div class="lb">Medium: top 3 items. Low-risk ones approve right from the widget</div></div>
+<div><div class="w" style="width:320px"><div class="k">Today</div><div style="padding:4px 0">10:00 Call with Lukáš <span class="pill t2">clash</span></div><div style="padding:4px 0">13:00 Lunch, Edutours team</div><div style="padding:4px 0">16:30 School visit, Brno</div><div style="border-top:0.5px solid var(--border);margin-top:6px;padding-top:6px" class="k">Research: Lisbon hotels · ready</div><div class="k">12 filed · 3 drafts saved</div></div><div class="lb">Large: the morning brief</div></div>
+</div>
+
+<div class="sec">Lock screen, Dynamic Island, controls</div>
+<div class="g">
+<div><div class="lk" style="width:320px"><div style="text-align:center;font-size:12px" class="k">Tue 27 · 10:00 Call with Lukáš</div><div style="text-align:center;font-size:40px;font-weight:500">9:41</div><div style="display:flex;gap:10px;justify-content:center;margin-top:6px"><div style="width:46px;height:46px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-weight:500">4</div><div style="width:150px;border-radius:12px;background:var(--surface-2);padding:6px 8px;font-size:11px"><b style="font-weight:500">Kevin</b><br>Next: certificate for Jana</div></div></div><div class="lb">Inline line, round count, rectangle with next item</div></div>
+<div><div class="lk" style="width:320px"><div style="background:var(--text-primary);color:var(--surface-2);border-radius:22px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12px"><span><i class="ti ti-search" aria-hidden="true"></i> Researching</span><span>Lisbon hotels · 6 min</span></div><div style="background:var(--surface-2);border-radius:14px;padding:10px;margin-top:10px;font-size:12px"><b style="font-weight:500">Research errand</b><div style="height:5px;background:var(--border);border-radius:3px;margin:6px 0"><div style="width:60%;height:5px;background:var(--text-accent);border-radius:3px"></div></div><span class="k">4 sources read · nothing will be booked</span></div></div><div class="lb">Live Activity: a running errand in the Dynamic Island</div></div>
+<div><div class="lk" style="width:150px;display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:56px;height:56px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center"><i class="ti ti-player-pause" style="font-size:22px" aria-hidden="true"></i></div><div style="font-size:12px">Pause Kevin</div><div style="width:56px;height:56px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center"><i class="ti ti-microphone" style="font-size:22px" aria-hidden="true"></i></div><div style="font-size:12px">Ask Kevin</div></div><div class="lb">Control Center buttons</div></div>
+</div>
+
+<div class="sec">Apple Watch</div>
+<div class="g">
+<div><div class="wt"><div class="k">10:09</div><div style="font-weight:500">Kevin</div><div>Move 10:00 call to 11:00?</div><div class="k">Lukáš's slot is free</div><div style="display:flex;gap:4px;margin-top:auto"><span class="btn" style="flex:1;text-align:center">Approve</span><span class="btn" style="flex:1;text-align:center">Later</span></div></div><div class="lb">Notification: low-risk, approve on wrist</div></div>
+<div><div class="wt"><div class="k">Review · 4</div><div><span class="pill t2">phone</span> Certificate, Jana</div><div><span class="pill t2">phone</span> Reply to Petr</div><div><span class="pill t1">wrist</span> Hold 11:00</div><div><span class="pill t1">wrist</span> Newsletter rule</div><div class="k" style="margin-top:auto">Outbound items open on iPhone (Face ID)</div></div><div class="lb">Queue: wrist vs phone items</div></div>
+<div><div class="wt" style="align-items:center;justify-content:center;text-align:center"><i class="ti ti-microphone" style="font-size:24px;color:var(--text-accent)" aria-hidden="true"></i><div style="font-weight:500">Instruct</div><div class="k">"Make it Friday instead"</div><div class="k">Kevin redoes the card</div></div><div class="lb">Dictate an instruction or a chat message</div></div>
+<div><div class="wt"><div class="k">Brief</div><div style="font-weight:500">3 meetings</div><div>10:00 Lukáš <span class="pill t2">clash</span></div><div>13:00 Lunch</div><div>16:30 Brno</div><div class="k" style="margin-top:auto">4 to review</div></div><div class="lb">Glance: today in one screen</div></div>
+<div><div class="wt" style="align-items:center;justify-content:center"><div style="width:110px;height:110px;border-radius:50%;border:0.5px solid var(--border-strong);position:relative;display:flex;align-items:center;justify-content:center"><div style="font-size:22px;font-weight:500">9:41</div><div style="position:absolute;top:8px;font-size:11px" class="k">4 · Kevin</div><div style="position:absolute;bottom:10px;font-size:11px" class="k">10:00 Lukáš</div></div></div><div class="lb">Complications + Smart Stack card</div></div>
+</div>
+</div></div></body></html>
