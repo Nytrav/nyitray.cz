@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Kevin app — rough draft</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<style>
+:root{--surface-1:#f7f6f3;--surface-2:#fff;--border:rgba(0,0,0,.12);--border-strong:rgba(0,0,0,.22);--text-primary:#1f1f1d;--text-secondary:#6b6a66;--text-accent:#185FA5;--bg-accent:#E6F1FB;--text-success:#3B6D11;--bg-success:#EAF3DE;--text-warning:#854F0B;--bg-warning:#FAEEDA;--text-danger:#A32D2D;--radius:8px}
+@media (prefers-color-scheme:dark){:root{--surface-1:#262624;--surface-2:#30302e;--border:rgba(255,255,255,.14);--border-strong:rgba(255,255,255,.26);--text-primary:#f2f1ec;--text-secondary:#b4b2a9;--text-accent:#85B7EB;--bg-accent:#0C447C;--text-success:#C0DD97;--bg-success:#27500A;--text-warning:#FAC775;--bg-warning:#633806;--text-danger:#F09595}body{background:#1f1e1d}}
+body{margin:0;font-family:-apple-system,system-ui,sans-serif;color:var(--text-primary);background:var(--surface-1)}
+button{font:inherit;color:var(--text-primary);background:transparent;border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:6px 10px;cursor:pointer}
+input{font:inherit;color:var(--text-primary);background:var(--surface-2);border:0.5px solid var(--border-strong);border-radius:var(--radius);height:36px;padding:0 10px}
+.ph{max-width:420px;margin:0 auto;padding:14px 12px;background:var(--surface-2);min-height:100vh;box-sizing:border-box}
+.scr{min-height:calc(100vh - 28px);display:flex;flex-direction:column}
+.tb{display:flex;border-top:0.5px solid var(--border);margin-top:auto;padding-top:8px;position:sticky;bottom:0;background:var(--surface-2)}
+.tb button{flex:1;border:none;background:transparent;font-size:11px;color:var(--text-secondary);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px}
+.tb button.on{color:var(--text-accent)}
+.cd{border:0.5px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:var(--surface-2);font-size:14px}
+.pill{font-size:11px;padding:2px 8px;border-radius:var(--radius)}
+.t0{background:var(--bg-success);color:var(--text-success)}.t1{background:var(--bg-accent);color:var(--text-accent)}.t2{background:var(--bg-warning);color:var(--text-warning)}
+.row{display:flex;gap:6px;margin-top:8px}.row button{flex:1;font-size:13px;padding:8px 4px}
+.mut{color:var(--text-secondary);font-size:12px}.lnk{cursor:pointer}
+</style></head><body><div class="ph"><div class="scr" id="app"></div></div>
+<script>function sendPrompt(t){alert('In the real app this would ask Kevin:\n\n'+t)}</script>
+<script>
+const S={tab:'lock',queue:[
+{id:1,tier:2,from:'Jana Nováková · email',sum:'Asks for a certificate for the Lisbon course',plan:'Make a certificate in Canva, send PDF to Jana',kind:'cert'},
+{id:2,tier:2,from:'Petr (ET) · email',sum:'Can we meet Thursday?',plan:'Reply: "Thursday 14:00 works, see you at the office."',kind:'reply'},
+{id:3,tier:1,from:'Kevin',sum:'Your calendar has a clash tomorrow 10:00',plan:'Hold 11:00–11:30 on your calendar for the call',kind:'hold'},
+{id:4,tier:1,from:'Kevin',sum:'Newsletters from 3 senders keep piling up',plan:'Rule: auto-file these into K/newsletters',kind:'rule'}],
+done:[],note:'',faceid:null,chat:[{k:'me',t:'Find me 3 hotels in Lisbon near the school, under €120, for 12–15 Nov'},{k:'kv',t:'On it. I\'ll bring back a sourced report in about 10 min. Nothing gets booked without you.'}],rev:0};
+const app=document.getElementById('app');
+function tabs(){return `<div class="tb">${[['brief','ti-sun','Brief'],['review','ti-checks','Review'],['chat','ti-message','Chat'],['lock','ti-device-mobile','Lock']].map(([k,i,l])=>`<button class="${S.tab==k?'on':''}" onclick="go('${k}')"><i class="ti ${i}" style="font-size:20px" aria-hidden="true"></i>${l}${k=='review'&&S.queue.length?` (${S.queue.length})`:''}</button>`).join('')}</div>`}
+function hdr(t,s){return `<div style="padding:4px 4px 10px"><div style="font-size:20px;font-weight:500">${t}</div>${s?`<div class="mut">${s}</div>`:''}</div>`}
+function tier(t){return `<span class="pill t${t}">${t==2?'Needs Face ID':t==1?'Bulk OK':'Auto'}</span>`}
+function lock(){return `<div style="text-align:center;padding:40px 0 20px"><div style="font-size:48px;font-weight:500">9:00</div><div class="mut">Tuesday 27 October</div></div>
+<div class="cd lnk" onclick="go('review')"><div style="display:flex;justify-content:space-between"><b style="font-weight:500">Kevin</b><span class="mut">now</span></div><div>4 to review · about 6 min</div><div class="mut">Includes a certificate for Jana</div></div>
+<div class="cd lnk" onclick="go('brief')"><div style="display:flex;justify-content:space-between"><b style="font-weight:500">Kevin</b><span class="mut">7:30</span></div><div>Morning brief is ready</div></div>
+<div class="mut" style="text-align:center;margin-top:12px">Apple only sees "Kevin · 1 item". The text is decrypted on your phone.</div>`+tabs()}
+function brief(){return hdr('Good morning','Tuesday · 3 meetings · 4 to review')+`
+<div class="cd"><div class="mut">Needs you</div>${S.queue.slice(0,3).map(q=>`<div class="lnk" style="padding:6px 0;border-top:0.5px solid var(--border)" onclick="open_(${q.id})">${q.sum}</div>`).join('')||'<div>All clear</div>'}</div>
+<div class="cd"><div class="mut">Today</div><div style="padding:4px 0">10:00 Call with Lukáš <span class="pill t2">clash</span></div><div style="padding:4px 0">13:00 Lunch, Edutours team</div><div style="padding:4px 0">16:30 School visit, Brno</div></div>
+<div class="cd mut">12 filed · 3 drafts saved · 30 newsletters</div>`+tabs()}
+function review(){if(!S.queue.length)return hdr('Review','')+`<div class="cd" style="text-align:center;padding:30px">Queue clear. Next nudge around 11:00.</div>`+(S.done.length?`<div class="mut" style="padding:4px">${S.done.join('<br>')}</div>`:'')+tabs();
+const bulk=S.queue.filter(q=>q.tier==1).length;
+return hdr('Review',`${S.queue.length} items · highest risk first`)+(bulk?`<button style="width:100%;margin-bottom:8px;font-size:12px" onclick="bulk()">Approve all ${bulk} internal items</button>`:'')+
+S.queue.slice().sort((a,b)=>b.tier-a.tier).map(q=>`<div class="cd"><div style="display:flex;justify-content:space-between;align-items:center"><span class="mut">${q.from}</span>${tier(q.tier)}</div><div class="lnk" style="margin-top:4px" onclick="open_(${q.id})">${q.plan}</div><div class="row"><button onclick="approve(${q.id})">Approve</button><button onclick="open_(${q.id})">Instruct</button><button onclick="deny(${q.id})">Deny</button></div></div>`).join('')+tabs()}
+function certPrev(){return `<div style="border:0.5px solid var(--border-strong);border-radius:8px;padding:16px;text-align:center;margin:8px 0;background:var(--surface-1)"><div class="mut" style="letter-spacing:1px">CERTIFICATE OF ATTENDANCE</div><div style="font-size:18px;font-weight:500;margin:8px 0">Jana Nováková</div><div style="font-size:12px">Job shadowing · Lisbon</div><div class="mut">${S.rev?'12. 10. – 16. 10. 2026':'12/10/2026 – 16/10/2026'}</div>${S.rev>1?'<div class="mut" style="margin-top:6px">[EUTA logo]</div>':''}<div class="mut" style="margin-top:8px">Canva draft · v${S.rev+1} · not shared</div></div>`}
+function detail(){const q=S.queue.find(x=>x.id==S.cur);if(!q){S.tab='review';return review()}
+let body='';if(q.kind=='cert')body=certPrev()+`<div class="mut">Then send: <b style="font-weight:500">Jana Nováková</b> &lt;jana@…&gt;<br>"Hi Jana, attached is your certificate. Best, Viktor"<br>Attachment: certificate-novakova.pdf</div>`;
+else if(q.kind=='reply')body=`<div class="cd" style="background:var(--surface-1)">To: Petr<br>Re: Thursday?<br><br>Thursday 14:00 works, see you at the office.<br>Viktor</div>`;
+else body=`<div class="cd" style="background:var(--surface-1)">${q.plan}</div>`;
+return `<div class="lnk mut" onclick="go('review')" style="padding:4px"><i class="ti ti-chevron-left" aria-hidden="true"></i> Review</div>`+hdr(q.sum,q.from)+`<div style="padding:0 4px">${tier(q.tier)}</div><div style="padding:8px 4px">${body}</div>
+<div style="padding:0 4px"><input id="ins" placeholder="Date in Czech format, add the logo" style="width:100%;box-sizing:border-box"><div id="err" style="font-size:13px;color:var(--text-danger);min-height:18px"></div></div>
+<div class="row" style="padding:0 4px"><button onclick="approve(${q.id})">Approve</button><button onclick="instruct(${q.id})">Instruct</button><button onclick="deny(${q.id})">Deny</button></div>`+tabs()}
+function chat(){return hdr('Kevin','')+`<div style="flex:1">${S.chat.map(m=>`<div style="display:flex;justify-content:${m.k=='me'?'flex-end':'flex-start'};margin-bottom:8px"><div style="max-width:78%;padding:8px 12px;border-radius:12px;font-size:13px;background:${m.k=='me'?'var(--bg-accent)':'var(--surface-1)'};color:${m.k=='me'?'var(--text-accent)':'var(--text-primary)'}">${m.t}</div></div>`).join('')}
+${S.rep?`<div class="cd"><div class="mut">Research report · 4 sources</div><div style="margin:4px 0">1. Hotel Lisboa Plaza, €112, 6 min walk<br>2. Casa Amora, €98, 12 min<br>3. My Story Rossio, €119, 9 min</div><div class="row"><button onclick="sendPrompt('In the Kevin app draft, what would booking a hotel look like as a proposal card?')">Propose booking ↗</button></div></div>`:''}</div>
+<div style="display:flex;gap:6px"><input id="ci" placeholder="Move my 3pm to Thursday" style="flex:1"><button onclick="say()" aria-label="Send"><i class="ti ti-send" aria-hidden="true"></i></button></div><div id="cerr" style="font-size:13px;color:var(--text-danger);min-height:16px"></div>`+tabs()}
+function face(){const q=S.queue.find(x=>x.id==S.faceid);return `<div style="min-height:560px;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;border-radius:24px"><div style="background:var(--surface-2);border-radius:16px;padding:24px;text-align:center;width:220px"><i class="ti ti-face-id" style="font-size:24px;color:var(--text-accent)" aria-hidden="true"></i><div style="font-weight:500;margin:8px 0">Face ID</div><div class="mut">Sign: ${q.plan}</div><div class="row"><button onclick="S.faceid=null;render()">Cancel</button><button onclick="ok(${q.id})">Look at phone</button></div></div></div>`}
+function render(){if(S.faceid){app.innerHTML=face();return}app.innerHTML={lock,brief,review,chat,detail}[S.tab]()}
+function go(t){S.tab=t;render()}
+function open_(id){S.cur=id;S.tab='detail';render()}
+function approve(id){const q=S.queue.find(x=>x.id==id);if(q.tier==2){S.faceid=id;render()}else ok(id)}
+function ok(id){const q=S.queue.find(x=>x.id==id);S.done.push((q.kind=='cert'?'Sent certificate to Jana':q.kind=='reply'?'Replied to Petr':'Done: '+q.plan)+' ✓');S.queue=S.queue.filter(x=>x.id!=id);S.faceid=null;S.tab='review';render()}
+function deny(id){const q=S.queue.find(x=>x.id==id);S.done.push('Denied: '+q.plan);S.queue=S.queue.filter(x=>x.id!=id);S.tab='review';render()}
+function bulk(){S.queue.filter(q=>q.tier==1).forEach(q=>S.done.push('Done: '+q.plan+' ✓'));S.queue=S.queue.filter(q=>q.tier!=1);render()}
+function instruct(id){const v=document.getElementById('ins').value.trim();if(!v){document.getElementById('err').textContent='Type what to change first';return}const q=S.queue.find(x=>x.id==id);if(q.kind=='cert')S.rev++;else q.plan=q.plan.replace(/"$/,'')+' (revised: '+v+')"';render()}
+function say(){const i=document.getElementById('ci');const v=i.value.trim();if(!v){document.getElementById('cerr').textContent='Type a message first';return}S.chat.push({k:'me',t:v});S.chat.push({k:'kv',t:'Got it. I\'ve put a proposal in your review queue.'});S.queue.push({id:Date.now(),tier:1,from:'You · chat',sum:v,plan:v,kind:'hold'});render()}
+setTimeout(()=>{S.rep=1;if(S.tab=='chat')render()},4000);
+render();
+</script>
+</body></html>
