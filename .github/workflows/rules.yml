@@ -1,0 +1,18 @@
+# Workshop rules for every PR (global rules, ADR 0003 and 0009). Added by new-project.
+name: rules
+on: [pull_request]
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Every PR updates STATUS.md (global rules)
+        run: git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -qx STATUS.md || { echo "This PR does not update STATUS.md"; exit 1; }
+      - name: PR description has the three-part summary (ADR 0003)
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          for h in "What changed" "What could go wrong" "How to undo"; do
+            grep -qi "$h" <<<"$BODY" || { echo "PR description is missing: $h"; exit 1; }
+          done
